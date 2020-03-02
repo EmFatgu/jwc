@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jwc>
+	<url_manager>
+		<!-- 非必需 ,表示管理器允许存放的url最大数量,如果不设置将会无限爬取-->
+		<max_num num="10" />
+		<!-- 必须配置,充当管理器的唯一标识(配置多个管理器时,此项配置必须不同) -->
+		<name name="test" />
+		<!-- 非必需,表示加入该管理器的url需要经过该正则表达式的验证-->
+		<pattern>(http|https)://baike\.baidu\.com(/[\w-\.\&amp;/?%=]*)?</pattern>
+		<!-- 必须配置,设定该管理器所分配的线程数量,根据要求效率分配 -->
+		<thread_num num="2" />
+		<!-- 必须配置,自定义处理类的路径 -->
+		<dealurlentity path="jwc.test.MyDeal" />
+		<!-- 非必需  默认为10(1000表示1秒),线程循环时间间隔-->
+		<time_interval time="5000"/>
+		<!-- 必须配置,起始页爬取页 -->
+		<startweb url="https://baike.baidu.com/"/>
+	</url_manager>
+	<!-- url_manager可配置多个 -->
+	<url_manager>
+		<max_num num="10000"/>
+		<name name="test1" />
+		<thread_num num="10" />
+		<dealurlentity path="jwc.test.MyDeal_2" />
+		<startweb url="https://csdn.net/"/>
+	</url_manager>
+	<http>
+		<!-- 非必需，请求时间超过设置时间将抛出请求超时异常 -->
+		<requesttime time="5000" />
+		<!-- 非必需，最大请求次数(请求失败则会重复请求,直到次数达到3次),默认为一次 -->
+		<maxtime time="2" /><!-- 非必需 -->
+		<!-- 非必需  设置http协议头,模仿浏览器请求,header可配置多个-->
+		<header headername="Content-Type" headercontext="application/x-www-form-urlencoded" />
+		<header headername="Accept-Language"
+			headercontext="zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2" />
+		<header headername="User-Agent"
+			headercontext="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0" />
+		<header headername="Accept"
+			headercontext="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+	</http>
+	<!-- 监听类配置信息 -->
+	<!-- 非必需 -->
+	<listener>
+	<!--非必需,监听类路径,必须实现UrlManagerListener接口  -->
+		<listener_class path="listener.TestListener"/>
+	</listener>
+</jwc>

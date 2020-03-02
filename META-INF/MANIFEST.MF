@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ dom4j-1.6.1.jar jsoup-1.11.2.jar
+Class-Path: .
+Rsrc-Main-Class: jwc.test.Client
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+
